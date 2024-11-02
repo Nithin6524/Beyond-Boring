@@ -1,0 +1,10 @@
+{
+  "manifest_version": 3,
+  "name": "Beyond Boring",
+  "version": "1.0",
+  "description": "Beyond Boring reimagines your Google homepage, infusing it with creativity and excitement for a refreshing online experience",
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "permissions":["topSites"]
+}
