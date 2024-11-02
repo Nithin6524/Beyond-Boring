@@ -1,0 +1,230 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* background-image: url("./images/luffy.jpg"); */
+    background-image: url("https://wallpapers-clan.com/wp-content/uploads/2024/11/hogwarts-student-magic-potion-class-desktop-wallpaper-cover.jpg");
+    
+}
+.dashboard {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 90vw;
+    border-radius: 20px;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1));
+    position: relative;
+    backdrop-filter: blur(10px);
+    z-index: 2;
+    padding: 2rem;
+}
+
+/* Columns */
+.column-1 {
+    width: 43%;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 4fr 5fr;
+    grid-template-rows: 45% auto;
+    grid-template-areas:
+        "weather weather"
+        "photo1 search";
+}
+
+.column-2 {
+    width: 35%;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+    grid-template-rows: 35% auto;
+    grid-template-areas:
+        "clock"
+        "music-player";
+}
+
+.column-3 {
+    width: 18%;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+        "photo2"
+        "favorites";
+}
+
+/* Widget styles */
+.widget {
+    border-radius: 15px;
+    padding: 0 1rem;
+    color: #fff;
+
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5));
+}
+
+/* Grid areas */
+.weather {
+    grid-area: weather;
+}
+.photo1 {
+    grid-area: photo1;
+}
+.search {
+    grid-area: search;
+}
+.clock {
+    grid-area: clock;
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+}
+.music-player {
+    grid-area: music-player;
+}
+.photo2 {
+    grid-area: photo2;
+}
+.favorites {
+    grid-area: favorites;
+}
+
+/* Weather details */
+.weather-header,
+.weather-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.weather-details {
+    margin-top: 2rem;
+}
+.location {
+    font-size: 2em;
+}
+.temperature {
+    font-size: 4em;
+    margin: 0;
+}
+.wind,
+.description {
+    font-size: 1.5em;
+    margin: 0;
+}
+
+.weather-icon{
+  filter: invert();
+}
+.search-input {
+    margin-top: 2rem;
+    max-width: 50%;
+}
+.mostVisited p {
+    font-size: 2em;
+    width: 100%;
+    text-align: center;
+}
+
+#search-input {
+    width: 70%;
+    padding: 0.8rem;
+    border-radius: 1rem;
+    border: none;
+    outline: none;
+    font-size: 1em; /* Font size for the input */
+    transition: all 0.3s ease; /* Transition for hover effects */
+}
+
+.search-input:focus {
+    background-color: #000000; /* Darker background on focus */
+    color: #fff; /* White text on focus */
+}
+
+.search-button {
+    padding: 0.8rem 1.5rem; /* Padding for the button */
+    border-radius: 1rem; /* Rounded corners */
+    border: none; /* No border */
+    background-color: #ff4081; /* Button color */
+    color: #fff; /* White text */
+    font-size: 1em; /* Font size for the button */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Transition for hover effect */
+}
+
+.search-button:hover {
+    background-color: #e91e63; /* Darker shade on hover */
+}
+
+/* Music player styles */
+.music-player {
+    padding: 1rem; /* Add some padding */
+}
+
+.iframe-container {
+    position: relative;
+    width: 100%; /* Full width */
+    padding-top: 56.25%; /* 16:9 aspect ratio */
+    margin-top: 1rem; /* Spacing above the iframe */
+}
+
+#youtube-iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Responsive adjustments */
+
+
+/* Date and time styles */
+.date {
+    font-size: 5em;
+    margin: 1rem 0;
+    width: fit-content;
+}
+.day {
+    font-size: x-large;
+}
+.month-year {
+    font-size: larger;
+    margin: 0;
+}
+.time-container {
+    display: flex;
+}
+.hours,
+.minutes {
+    font-size: 4rem;
+}
+
+/* Background images for widgets */
+.photo2 {
+    background-image: url("https://wallpapers-clan.com/wp-content/uploads/2024/10/nami-one-piece-cute-smile-desktop-wallpaper-preview.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.photo1 {
+    background-image: url("https://wallpapers-clan.com/wp-content/uploads/2024/10/luffy-angry-face-red-background-desktop-wallpaper-cover.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.mostVisited {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px;
+    flex-wrap: wrap;
+}
+.site-image {
+    width: 32px;
+    height: 32px;
+}
+.site-image:hover {
+    cursor: pointer;
+}

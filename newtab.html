@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="Content-Security-Policy" content="default-src gap://ready file://* *; style-src 'self' http://* https://* 'unsafe-inline'; script-src 'self' http://* https://* 'unsafe-inline' 'unsafe-eval'">
+        <title>Dashboard</title>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <div class="dashboard">
+            <div class="column-1">
+                <div class="widget weather">
+                    <div class="weather-header">
+                        <p class="location"></p>
+                        <img src="" alt="Weather Icon" class="weather-icon" />
+                    </div>
+                    <div>
+                        <p class="temperature"></p>
+                    </div>
+                    <div class="weather-details">
+                        <p class="wind"></p>
+                        <p class="description"></p>
+                    </div>
+                </div>
+
+                <div class="widget photo1"></div>
+                <div class="widget search">
+                    <!-- Search bar content --><input
+                        type="text"
+                        class="search-input"
+                        id="search-input"
+                        placeholder="Search " />
+                    <div class="mostVisited">
+                       <p>Most Visited sites</p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="column-2">
+                <div class="widget clock">
+                    <div class="date-container">
+                        <p class="date">31</p>
+                        <p class="month-year">October 2024</p>
+                        <p class="day">Thursday</p>
+                    </div>
+                    <div class="time-container">
+                        <p class="hours">10<span>:</span></p>
+                        <p class="minutes">45</p>
+                    </div>
+                </div>
+                <div class="widget music-player">
+                    <input type="text" id="search-input" placeholder="Search for a video" />
+                    <button class="search-button" id="search-button">Search</button>
+                    <div class="iframe-container">
+                        <div class="overlay"></div>
+
+                        <iframe
+                            id="youtube-iframe"
+                            src="https://www.youtube.com/embed/VIDEO_ID"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="column-3">
+                <div class="widget photo2"></div>
+                <div class="widget favorites"></div>
+            </div>
+        </div>
+        <script type="module" src="script.js"></script>
+        <script src="./vendor/moment.min.js"></script>
+        <script src="https://www.youtube.com/iframe_api"></script>
+       
+    </body>
+</html>
