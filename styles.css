@@ -7,9 +7,9 @@ body {
     font-family: Arial, sans-serif;
     background-repeat: no-repeat;
     background-size: cover;
-    /* background-image: url("./images/luffy.jpg"); */
-    background-image: url("https://wallpapers-clan.com/wp-content/uploads/2024/11/hogwarts-student-magic-potion-class-desktop-wallpaper-cover.jpg");
-    
+    background-image: url("./images/luffy.jpg");
+    /* background-image: url("https://wallpapers-clan.com/wp-content/uploads/2024/11/hogwarts-student-magic-potion-class-desktop-wallpaper-cover.jpg"); */
+    /* background-image: url("https://wallpapers-clan.com/wp-content/uploads/2024/10/nami-one-piece-cute-smile-desktop-wallpaper-cover.jpg"); */
 }
 .dashboard {
     display: flex;
@@ -115,10 +115,10 @@ body {
     margin: 0;
 }
 
-.weather-icon{
-  filter: invert();
+.weather-icon {
+    filter: invert();
 }
-.search-input {
+.search-widget {
     margin-top: 2rem;
     max-width: 50%;
 }
@@ -128,7 +128,7 @@ body {
     text-align: center;
 }
 
-#search-input {
+.search-widget {
     width: 70%;
     padding: 0.8rem;
     border-radius: 1rem;
@@ -137,13 +137,24 @@ body {
     font-size: 1em; /* Font size for the input */
     transition: all 0.3s ease; /* Transition for hover effects */
 }
+#search-input {
+    width: 40%;
+    padding: 0.8rem;
+    border-radius: 1rem;
+    border: none;
+    outline: none;
+    font-size: 1em; /* Font size for the input */
+    transition: all 0.3s ease; /* Transition for hover effects */
+}
 
-.search-input:focus {
+.search-widget:focus,
+#search-input:focus {
     background-color: #000000; /* Darker background on focus */
     color: #fff; /* White text on focus */
 }
 
-.search-button {
+.search-button,
+.playlist-button {
     padding: 0.8rem 1.5rem; /* Padding for the button */
     border-radius: 1rem; /* Rounded corners */
     border: none; /* No border */
@@ -152,10 +163,12 @@ body {
     font-size: 1em; /* Font size for the button */
     cursor: pointer; /* Pointer cursor on hover */
     transition: background-color 0.3s ease; /* Transition for hover effect */
+    margin-left: 1rem;
 }
 
-.search-button:hover {
-    background-color: #e91e63; /* Darker shade on hover */
+.search-button:hover,
+.playlist-button:hover {
+    background-color: #f50052; /* Darker shade on hover */
 }
 
 /* Music player styles */
@@ -179,7 +192,6 @@ body {
 }
 
 /* Responsive adjustments */
-
 
 /* Date and time styles */
 .date {
@@ -227,4 +239,23 @@ body {
 }
 .site-image:hover {
     cursor: pointer;
+}
+
+@media (max-width: 1200px) {
+    .column-1,
+    .column-2,
+    .column-3 {
+        height: 100%;
+        width: 100%;
+        grid-template-rows: auto;
+    }
+    .column-3 {
+        background-color: #000000;
+    }
+    .temperature {
+        font-size: 3rem;
+    }
+    .location {
+        font-size: 1.5rem;
+    }
 }

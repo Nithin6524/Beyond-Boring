@@ -1,0 +1,46 @@
+#new-playlist-name,
+#video-title,
+#video-url {
+    width: 80%;
+    height: 2.4rem;
+    padding: 0.2rem 0 0.2rem 1rem;
+    border-radius: 1rem;
+    border: none;
+    outline: none;
+    font-size: 1em; 
+    transition: all 0.3s ease; 
+    border: 1px solid black;
+}
+#new-playlist-name:focus {
+    background-color: #000000; 
+    color: #fff; 
+}
+body {
+    background-image: url("https://w0.peakpx.com/wallpaper/919/499/HD-wallpaper-vaporwave-anime-girl-sky-magenta-pink-anime-girl-sexy-android-ios-iphone-samsung-dark-thumbnail.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.side-panel {
+    backdrop-filter: blur(20px);
+}
+.side-panel p {
+    font-size: 2rem;
+    color: white;
+}
+#add-playlist-btn {
+    font-size: 2em;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.7rem;
+    border: 1px solid white;
+    color: rgb(0, 0, 0);
+    background-color: #ffffff;
+    position: relative;
+    top: 0.3rem;
+    left: 1rem;
+}
+
+#add-playlist-btn:hover {
+    filter: invert();
+    cursor: pointer;
+}

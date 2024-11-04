@@ -6,5 +6,15 @@
   "chrome_url_overrides": {
     "newtab": "newtab.html"
   },
-  "permissions":["topSites"]
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": [
+    "topSites",
+    "sidePanel",
+    "storage"
+  ]
 }

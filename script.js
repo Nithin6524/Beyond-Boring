@@ -33,8 +33,6 @@ async function updateWeatherUI(data) {
 // Call the fetchWeather function to initiate the process
 fetchWeather();
 
-
-
 window.onload = async () => {
     const mostVisitedURLs = await chrome.topSites.get();
     const mostVisitedDiv = document.querySelector(".mostVisited");
@@ -50,7 +48,7 @@ window.onload = async () => {
             image.onload = function () {
                 if (this.width > 0) {
                     urlSet.add(faviconURL);
-                    console.log(`Favicon added: ${faviconURL}`);
+                    // console.log(`Favicon added: ${faviconURL}`);
                 }
                 resolve(); // Resolve the promise when done
             };
@@ -61,21 +59,25 @@ window.onload = async () => {
             };
 
             image.src = faviconURL;
+            // image.setAttribute("crossorigin", "anonymous");
         });
     };
 
+    console.log(mostVisitedURLs);
     // Create an array of promises to check each URL
     const faviconPromises = mostVisitedURLs.map((obj) => {
         const domain = obj.url.replace(/.+\/\/|www.|\..+/g, "");
-        const faviconURL = `https://www.${domain}.com/favicon.ico`;
-        return checkFavicon(faviconURL);
+        if (domain != "192") {
+            const faviconURL = `https://www.${domain}.com/favicon.ico`;
+            return checkFavicon(faviconURL);
+        }
     });
 
     // Wait for all favicon checks to complete
     await Promise.all(faviconPromises);
 
     // Render only the top 6 favicons in `urlSet`
-    Array.from(urlSet).slice(0, 6).forEach((ImageSrc) => {
+    Array.from(urlSet).forEach((ImageSrc) => {
         const ImageElement = document.createElement("img");
         ImageElement.classList.add("site-image");
         ImageElement.src = ImageSrc;
@@ -83,21 +85,6 @@ window.onload = async () => {
     });
 };
 
-
-document.getElementById('search-button').addEventListener('click', function() {
-    const searchQuery = document.getElementById('search-input').value;
-    const videoId = extractVideoID(searchQuery); // Define this function to extract ID from the input
-
-    if (videoId) {
-        document.getElementById('youtube-iframe').src = `https://www.youtube.com/embed/${videoId}`;
-    } else {
-        alert('Invalid YouTube video link or ID');
-    }
+document.querySelector(".playlist-button").addEventListener("click", () => {
+    chrome.runtime.sendMessage({ type: "open_side_panel" });
 });
-
-function extractVideoID(url) {
-    // Example of extracting video ID from a URL
-    const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^&\n]{11})/;
-    const match = url.match(regex);
-    return match ? match[1] : null;
-}
