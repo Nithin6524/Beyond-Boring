@@ -134,3 +134,50 @@ window.onload = async () => {
 document.querySelector(".playlist-button").addEventListener("click", () => {
     chrome.runtime.sendMessage({ type: "open_side_panel" });
 });
+
+// Ensure the moment library is loaded
+if (typeof moment === 'undefined') {
+    console.error("Moment.js is not loaded. Make sure the library is included correctly.");
+} else {
+    console.log("Moment.js loaded successfully.");
+}
+
+function updateClock() {
+    // Check if the element selectors are correct
+    const hoursElement = document.querySelector(".hours");
+    const minutesElement = document.querySelector(".minutes");
+    const dateElement = document.querySelector(".date");
+    const monthYearElement = document.querySelector(".month-year");
+    const dayElement = document.querySelector(".day");
+
+    if (!hoursElement || !minutesElement || !dateElement || !monthYearElement || !dayElement) {
+        console.error("One or more clock elements are missing. Check your HTML selectors.");
+        return;
+    }
+
+    // Log the current moment time to confirm it's fetching correctly
+    const currentTime = moment();
+    console.log("Current Time:", currentTime.format("HH:mm:ss"));
+
+    // Update the clock elements
+    hoursElement.textContent = currentTime.format("HH");
+    minutesElement.textContent = currentTime.format("mm");
+    dateElement.textContent = currentTime.format("DD");
+    monthYearElement.textContent = currentTime.format("MMMM YYYY");
+    dayElement.textContent = currentTime.format("dddd");
+
+    console.log("Updated Clock: ", {
+        hours: hoursElement.textContent,
+        minutes: minutesElement.textContent,
+        date: dateElement.textContent,
+        monthYear: monthYearElement.textContent,
+        day: dayElement.textContent
+    });
+}
+
+// Set an interval to update the clock every second
+setInterval(updateClock, 1000);
+
+// Call the function once on load to set initial values
+updateClock();
+
