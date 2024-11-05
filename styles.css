@@ -277,3 +277,36 @@ body {
     padding: 0 0.2rem;
     line-height: 1;
 }
+
+.spotify-container {
+    width: 100%; /* Full width of the container */
+    max-width: 100%; /* Ensures it doesn't overflow */
+    display: flex;
+    justify-content: center; /* Center-aligns content */
+}
+
+.spotify-container iframe {
+    width: 100%; /* Make iframe take full width */
+    height: 352px; /* Default height for larger screens */
+    border-radius: 12px;
+    transition: height 0.3s ease; /* Smooth height change */
+}
+
+/* Responsive height adjustments for smaller screens */
+@media (max-width: 768px) {
+    .spotify-container iframe {
+        height: 300px;
+    }
+}
+
+@media (max-width: 576px) {
+    .spotify-container iframe {
+        height: 250px;
+    }
+}
+
+@media (max-width: 400px) {
+    .spotify-container iframe {
+        height: 200px;
+    }
+}
