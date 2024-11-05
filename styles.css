@@ -4,10 +4,9 @@ body {
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    font-family: Arial, sans-serif;
     background-repeat: no-repeat;
     background-size: cover;
-    background-image: url("./images/luffy.jpg");
+    background-image: url("https://wallpapers-clan.com/wp-content/uploads/2024/10/crimson-sunset-mountain-range-desktop-wallpaper-cover.jpg ");
     /* background-image: url("https://wallpapers-clan.com/wp-content/uploads/2024/11/hogwarts-student-magic-potion-class-desktop-wallpaper-cover.jpg"); */
     /* background-image: url("https://wallpapers-clan.com/wp-content/uploads/2024/10/nami-one-piece-cute-smile-desktop-wallpaper-cover.jpg"); */
 }
@@ -70,6 +69,10 @@ body {
 /* Grid areas */
 .weather {
     grid-area: weather;
+    font-family: "Space Grotesk", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
 }
 .photo1 {
     grid-area: photo1;
@@ -81,6 +84,8 @@ body {
     grid-area: clock;
     display: grid;
     grid-template-columns: repeat(2, 50%);
+
+    font-family: "JetBrains Mono", monospace;
 }
 .music-player {
     grid-area: music-player;
@@ -115,8 +120,24 @@ body {
     margin: 0;
 }
 
-.weather-icon {
+/* .weather-icon {
     filter: invert();
+} */
+.location-div {
+    display: flex;
+}
+
+.location-icon {
+    height: 30px;
+    width: 25px;
+    margin: 0;
+    position: relative;
+    top: 25px;
+    left: 10px;
+}
+.wind-div{
+    display:flex;
+    gap: 5px;
 }
 .search-widget {
     margin-top: 2rem;
@@ -216,7 +237,7 @@ body {
 
 /* Background images for widgets */
 .photo2 {
-    background-image: url("https://wallpapers-clan.com/wp-content/uploads/2024/10/nami-one-piece-cute-smile-desktop-wallpaper-preview.jpg");
+    background-image: url("https://images.unsplash.com/photo-1730401723426-5ef4de56df92?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
     background-repeat: no-repeat;
     background-size: cover;
 }

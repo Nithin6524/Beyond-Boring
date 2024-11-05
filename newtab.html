@@ -5,20 +5,58 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Dashboard</title>
         <link rel="stylesheet" href="styles.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+            rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Space+Grotesk:wght@300..700&display=swap"
+            rel="stylesheet" />
     </head>
     <body>
         <div class="dashboard">
             <div class="column-1">
                 <div class="widget weather">
                     <div class="weather-header">
-                        <p class="location"></p>
+                        <div class="location-div">
+                            <p class="location"></p>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                height="24px"
+                                viewBox="0 -960 960 960"
+                                width="24px"
+                                fill="#fff"
+                                class="location-icon">
+                                <path
+                                    d="M516-120 402-402 120-516v-56l720-268-268 720h-56Zm26-148 162-436-436 162 196 78 78 196Zm-78-196Z" />
+                            </svg>
+                        </div>
+
                         <img src="" alt="Weather Icon" class="weather-icon" />
                     </div>
                     <div>
                         <p class="temperature"></p>
                     </div>
                     <div class="weather-details">
-                        <p class="wind"></p>
+                        <div class="wind-div">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                height="24px"
+                                viewBox="0 -960 960 960"
+                                width="24px"
+                                fill="#fff">
+                                <path
+                                    d="M750-614q-27 27-62 41t-70 14q-35 0-69-13.5T488-614l-75-75q-15-15-34-22.5t-39-7.5q-20 0-39 7.5T267-689l-75 75-57-57 75-75q27-27 61-40.5t69-13.5q35 0 68.5 13.5T469-746l75 75q16 16 35 23.5t39 7.5q20 0 39.5-7.5T693-671l75-75 57 57-75 75Zm0 200q-27 27-61.5 40.5T619-360q-35 0-69.5-13.5T488-414l-75-75q-15-15-34-22.5t-39-7.5q-20 0-39 7.5T267-489l-75 75-57-56 75-76q27-27 61-40.5t69-13.5q35 0 68.5 13.5T469-546l75 75q16 16 35 23.5t39 7.5q20 0 39.5-7.5T693-471l75-75 57 57-75 75Zm-1 200q-27 27-61 40.5T619-160q-35 0-69.5-13.5T488-214l-76-75q-15-15-34-22.5t-39-7.5q-20 0-39 7.5T266-289l-75 75-56-56 75-76q27-27 61-40.5t69-13.5q35 0 68.5 13.5T469-346l75 75q16 16 35.5 23.5T619-240q20 0 39-7.5t35-23.5l75-75 56 57-75 75Z" />
+                            </svg>
+                            
+                            <p class="wind"></p>
+                        </div>
+
                         <p class="description"></p>
                     </div>
                 </div>
@@ -28,7 +66,6 @@
                     <!-- Search bar content --><input
                         type="text"
                         class="search-widget"
-                        
                         placeholder="Search " />
                     <div class="mostVisited">
                         <p>Most Visited sites</p>
@@ -66,9 +103,7 @@
             </div>
             <div class="column-3">
                 <div class="widget photo2"></div>
-                <div class="widget favorites">
-
-                </div>
+                <div class="widget favorites"></div>
             </div>
         </div>
         <script src="script.js"></script>

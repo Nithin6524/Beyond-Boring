@@ -7,18 +7,18 @@
     border-radius: 1rem;
     border: none;
     outline: none;
-    font-size: 1em; 
-    transition: all 0.3s ease; 
+    font-size: 1em;
+    transition: all 0.3s ease;
     border: 1px solid black;
 }
 #new-playlist-name:focus {
-    background-color: #000000; 
-    color: #fff; 
+    background-color: #000000;
+    color: #fff;
 }
 body {
-    background-image: url("https://w0.peakpx.com/wallpaper/919/499/HD-wallpaper-vaporwave-anime-girl-sky-magenta-pink-anime-girl-sexy-android-ios-iphone-samsung-dark-thumbnail.jpg");
+    background-image: url("https://wallpapers-clan.com/wp-content/uploads/2024/11/one-piece-luffy-sunny-day-desktop-wallpaper-cover.jpg");
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size:cover;
 }
 .side-panel {
     backdrop-filter: blur(20px);
