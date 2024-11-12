@@ -53,10 +53,8 @@
                                 <path
                                     d="M750-614q-27 27-62 41t-70 14q-35 0-69-13.5T488-614l-75-75q-15-15-34-22.5t-39-7.5q-20 0-39 7.5T267-689l-75 75-57-57 75-75q27-27 61-40.5t69-13.5q35 0 68.5 13.5T469-746l75 75q16 16 35 23.5t39 7.5q20 0 39.5-7.5T693-671l75-75 57 57-75 75Zm0 200q-27 27-61.5 40.5T619-360q-35 0-69.5-13.5T488-414l-75-75q-15-15-34-22.5t-39-7.5q-20 0-39 7.5T267-489l-75 75-57-56 75-76q27-27 61-40.5t69-13.5q35 0 68.5 13.5T469-546l75 75q16 16 35 23.5t39 7.5q20 0 39.5-7.5T693-471l75-75 57 57-75 75Zm-1 200q-27 27-61 40.5T619-160q-35 0-69.5-13.5T488-214l-76-75q-15-15-34-22.5t-39-7.5q-20 0-39 7.5T266-289l-75 75-56-56 75-76q27-27 61-40.5t69-13.5q35 0 68.5 13.5T469-346l75 75q16 16 35.5 23.5T619-240q20 0 39-7.5t35-23.5l75-75 56 57-75 75Z" />
                             </svg>
-                            
                             <p class="wind"></p>
                         </div>
-
                         <p class="description"></p>
                     </div>
                 </div>
@@ -66,10 +64,23 @@
                     <!-- Search bar content --><input
                         type="text"
                         class="search-widget"
+                        id="myInput"
                         placeholder="Search " />
                     <div class="mostVisited">
                         <p>Most Visited sites</p>
                     </div>
+
+                    <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="heart-icon"
+                        id="likeButton">
+                        <path
+                            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                    </svg>
+                    <div class="tooltip"></div>
                 </div>
             </div>
             <div class="column-2">
@@ -80,7 +91,9 @@
                         <p class="day"></p>
                     </div>
                     <div class="time-container">
-                        <p class="hours"></p><span class="colon">:</span><p class="minutes"></p>
+                        <p class="hours"></p>
+                        <span class="colon">:</span>
+                        <p class="minutes"></p>
                     </div>
                 </div>
                 <div class="widget music-player">
@@ -88,28 +101,24 @@
                     <button class="search-button" id="search-button">Search</button>
                     <button class="playlist-button" id="playlist-button">Playlist</button>
                     <div class="iframe-container">
-                        <div class="overlay"></div>
-
                         <iframe
-                            id="youtube-iframe"
-                            src="https://www.youtube.com/embed/VIDEO_ID"
-                            frameborder="0"
+                            id="player"
+                            type="text/html"
+                            src="http://www.youtube.com/embed/VIDEO_ID?enablejsapi=1"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen>
-                        </iframe>
+                            allowfullscreen
+                            frameborder="0"></iframe>
                     </div>
                 </div>
             </div>
             <div class="column-3">
                 <div class="widget photo2"></div>
-                <div class="widget favorites">
-
-                </div>
+                <div class="widget favorites"></div>
             </div>
         </div>
         <script src="script.js"></script>
         <script src="./vendor/moment.min.js"></script>
         <script src="ytscript.js"></script>
-        <script src="sidepanel.js"></script>
+        <script src="backImages.js"></script>
     </body>
 </html>

@@ -15,6 +15,7 @@
   "permissions": [
     "topSites",
     "sidePanel",
-    "storage"
+    "storage",
+    "tabs"
   ]
 }

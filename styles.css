@@ -6,9 +6,6 @@ body {
     margin: 0;
     background-repeat: no-repeat;
     background-size: cover;
-    background-image: url("https://wallpapers-clan.com/wp-content/uploads/2024/10/crimson-sunset-mountain-range-desktop-wallpaper-cover.jpg ");
-    /* background-image: url("https://wallpapers-clan.com/wp-content/uploads/2024/11/hogwarts-student-magic-potion-class-desktop-wallpaper-cover.jpg"); */
-    /* background-image: url("https://wallpapers-clan.com/wp-content/uploads/2024/10/nami-one-piece-cute-smile-desktop-wallpaper-cover.jpg"); */
 }
 .dashboard {
     display: flex;
@@ -23,7 +20,6 @@ body {
     padding: 2rem;
 }
 
-/* Columns */
 .column-1 {
     width: 43%;
     display: grid;
@@ -34,7 +30,9 @@ body {
         "weather weather"
         "photo1 search";
 }
-
+.weather-icon {
+    filter: invert(100%);
+}
 .column-2 {
     width: 35%;
     display: grid;
@@ -84,7 +82,6 @@ body {
     grid-area: clock;
     display: grid;
     grid-template-columns: repeat(2, 50%);
-
     font-family: "JetBrains Mono", monospace;
 }
 .music-player {
@@ -119,10 +116,6 @@ body {
     font-size: 1.5em;
     margin: 0;
 }
-
-/* .weather-icon {
-    filter: invert();
-} */
 .location-div {
     display: flex;
 }
@@ -135,23 +128,21 @@ body {
     top: 25px;
     left: 10px;
 }
-.wind-div{
-    display:flex;
+.wind-div {
+    display: flex;
     gap: 5px;
 }
-.search-widget {
-    margin-top: 2rem;
-    max-width: 50%;
-}
+
 .mostVisited p {
-    font-size: 2em;
+    font-size: 1.7rem;
     width: 100%;
     text-align: center;
 }
 
 .search-widget {
-    width: 70%;
+    width: 90%;
     padding: 0.8rem;
+    margin-top: 2rem;
     border-radius: 1rem;
     border: none;
     outline: none;
@@ -170,8 +161,8 @@ body {
 
 .search-widget:focus,
 #search-input:focus {
-    background-color: #000000; /* Darker background on focus */
-    color: #fff; /* White text on focus */
+    background: linear-gradient(90deg,#000, #000);
+    color: #fff; 
 }
 
 .search-button,
@@ -204,7 +195,7 @@ body {
     margin-top: 1rem; /* Spacing above the iframe */
 }
 
-#youtube-iframe {
+#player {
     position: absolute;
     top: 0;
     left: 0;
@@ -212,24 +203,27 @@ body {
     height: 100%;
 }
 
-/* Responsive adjustments */
-
-/* Date and time styles */
+.date-container{
+    
 .date {
-    font-size: 5em;
-    margin: 1rem 0;
-    width: fit-content;
+    margin: 0;
+    font-size: 3.5rem;
 }
 .day {
-    font-size: x-large;
+    font-size: 1.5rem;
+
 }
 .month-year {
-    font-size: larger;
-    margin: 0;
+    margin-top: 0;
+    font-size: 1.3rem;
+    margin-bottom: 3rem;
 }
+}
+
 .time-container {
     display: flex;
 }
+
 .hours,
 .minutes {
     font-size: 4rem;
@@ -249,14 +243,15 @@ body {
 
 .mostVisited {
     display: flex;
-    align-items: center;
     justify-content: space-around;
     padding: 10px;
     flex-wrap: wrap;
 }
 .site-image {
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
+    border-radius: 5px;
+    margin-right: 3px;
 }
 .site-image:hover {
     cursor: pointer;
@@ -300,10 +295,10 @@ body {
 }
 
 .spotify-container {
-    width: 100%; /* Full width of the container */
-    max-width: 100%; /* Ensures it doesn't overflow */
+    width: 100%; 
+    max-width: 100%; 
     display: flex;
-    justify-content: center; /* Center-aligns content */
+    justify-content: center; 
 }
 
 .spotify-container iframe {
@@ -330,4 +325,45 @@ body {
     .spotify-container iframe {
         height: 200px;
     }
+}
+
+
+
+.liked{
+    fill:#f50052;
+}
+
+.unliked{
+    fill:#fff;
+}
+
+#likeButton {
+    cursor: pointer;
+    width: 100%;
+}
+
+.tooltip {
+    width: 200px;
+    visibility: hidden; 
+    opacity: 0; 
+    background-color: black; 
+    color: white; 
+    text-align: center; 
+    border-radius: 5px;
+    padding: 5px; 
+    z-index: 10; 
+    filter: brightness(1.2);
+    transform: translate(10%);
+}
+
+#likeButton:hover + .tooltip {
+    visibility: visible; 
+    opacity: 1; 
+}
+
+.favorites{
+    background-image: url("https://media.istockphoto.com/id/157393020/photo/city-street.jpg?s=612x612&w=0&k=20&c=f3HuhzR0wGH5XA2Glbn4gw_8StE6Un2E36-UXTJB93s=");
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.8;
 }
