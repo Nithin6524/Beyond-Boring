@@ -5,7 +5,7 @@ async function setBackground() {
             document.body.style.backgroundImage = `url(${url})`;
             document.body.style.backgroundSize = "cover";
         } else {
-            console.log("No background URL found in storage");
+            console.error("No background URL found in storage");
         }
     } catch (error) {
         console.error("Error retrieving background URL:", error);
@@ -47,7 +47,6 @@ async function toggleLike(backgroundURL) {
             await chrome.storage.sync.set({ likedBackgrounds: updatedLikedBackgrounds });
             updateUI(false);
         } else {
-            console.log(backgroundURL);
             likedBackgrounds.push(backgroundURL);
             await chrome.storage.sync.set({ likedBackgrounds });
             updateUI(true);

@@ -15,14 +15,6 @@ chrome.runtime.onMessage.addListener((message, sender) => {
     })();
 });
 
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    if (message.type === "search" && message.query) {
-        console.log(message.type, message.query);
-
-        const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(message.query)}`;
-        chrome.tabs.create({ url: searchUrl });
-    }
-});
 
 chrome.storage.sync.get(["likedBackgrounds", "customBackgrounds"], (result) => {
     if (!result.likedBackgrounds) {
@@ -98,8 +90,5 @@ async function getBackgroundURL() {
 
 chrome.tabs.onCreated.addListener(async (tab) => {
     const backgroundURL = await getBackgroundURL();
-    chrome.storage.local.set({ url: `${backgroundURL}` }).then(() => {
-        console.log("Value is set");
-    });
+    chrome.storage.local.set({ url: `${backgroundURL}` });
 });
-

@@ -1,5 +1,3 @@
-// script.js
-
 const lat = 12.971599;
 const long = 77.594566;
 
@@ -12,7 +10,7 @@ async function fetchWeather() {
         }
 
         const data = await response.json();
-        console.log(data);
+
         updateWeatherUI(data);
     } catch (error) {
         console.error(error.message);
@@ -70,7 +68,7 @@ window.onload = async () => {
     function createSiteLink({ icon, link }) {
         const SiteLinkEle = document.createElement("a");
         const linksDiv = document.createElement("div");
-        SiteLinkEle.target = "_blank";
+        SiteLinkEle.target = "_self";
         SiteLinkEle.href = link;
 
         const ImageElement = document.createElement("img");
@@ -95,18 +93,16 @@ window.onload = async () => {
         searchInput.dispatchEvent(event);
     }
 
-    // Adding an event listener to check if it triggers a search
     searchInput.addEventListener("keydown", (event) => {
         if (event.key === "Enter") {
             const query = searchInput.value.trim();
             if (query) {
-                chrome.runtime.sendMessage({ type: "search", query: query });
-            } else {
+                const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+                chrome.tabs.update({ url: searchUrl });
             }
         }
     });
 
-    // Trigger the function to simulate the Enter key (for testing)
     simulateEnterKeyPress();
 };
 
