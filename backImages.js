@@ -1,20 +1,25 @@
+// Set the background image based on the URL stored in chrome.storage.local
 async function setBackground() {
     try {
-        const { url } = await chrome.storage.local.get("url");
-        if (url) {
-            document.body.style.backgroundImage = `url(${url})`;
-            document.body.style.backgroundSize = "cover";
-        } else {
-            console.error("No background URL found in storage");
+        let { url } = await chrome.storage.local.get("url");
+
+        // If no URL is found, set a default background
+        if (!url) {
+            url =
+                "https://wallpapers-clan.com/wp-content/uploads/2024/10/crimson-sunset-mountain-range-desktop-wallpaper-cover.jpg"; // Default background URL
         }
+
+        document.body.style.backgroundImage = `url(${url})`;
+        document.body.style.backgroundSize = "cover";
     } catch (error) {
         console.error("Error retrieving background URL:", error);
     }
 }
+
+// Get the current background URL from chrome.storage.local
 async function getCurrentBackground() {
     try {
         const { url } = await chrome.storage.local.get("url");
-
         return url || null;
     } catch (error) {
         console.error("Error getting current background:", error);
@@ -22,6 +27,7 @@ async function getCurrentBackground() {
     }
 }
 
+// Check if the background URL is in the list of liked backgrounds
 async function checkIfLiked(backgroundURL) {
     try {
         const { likedBackgrounds = [] } = await chrome.storage.sync.get("likedBackgrounds");
@@ -32,6 +38,7 @@ async function checkIfLiked(backgroundURL) {
     }
 }
 
+// Toggle the 'like' status for a background URL
 async function toggleLike(backgroundURL) {
     if (!backgroundURL) {
         console.error("No background URL set.");
@@ -42,6 +49,7 @@ async function toggleLike(backgroundURL) {
         const { likedBackgrounds = [] } = await chrome.storage.sync.get("likedBackgrounds");
         const isLiked = likedBackgrounds.includes(backgroundURL);
 
+        // If the background is liked, remove it from the list; otherwise, add it
         if (isLiked) {
             const updatedLikedBackgrounds = likedBackgrounds.filter((bg) => bg !== backgroundURL);
             await chrome.storage.sync.set({ likedBackgrounds: updatedLikedBackgrounds });
@@ -56,9 +64,16 @@ async function toggleLike(backgroundURL) {
     }
 }
 
+// Update the like button UI based on whether the background is liked or not
 function updateUI(isLiked) {
     const likeButton = document.getElementById("likeButton");
 
+    if (!likeButton) {
+        console.error("Like button not found in the DOM");
+        return;
+    }
+
+    // Update the UI based on the like status
     if (isLiked) {
         likeButton.classList.add("liked");
         likeButton.classList.remove("unliked");
@@ -66,25 +81,29 @@ function updateUI(isLiked) {
     } else {
         likeButton.classList.remove("liked");
         likeButton.classList.add("unliked");
-
         document.querySelector(".tooltip").innerHTML = "Like the background";
     }
 }
 
+// Initialize the background settings and event listeners
 async function init() {
     try {
         const backgroundURL = await getCurrentBackground();
+        await setBackground(); // Set the background image
 
-        await setBackground();
-
-        const isLiked = await checkIfLiked(backgroundURL);
-        updateUI(isLiked);
+        const isLiked = await checkIfLiked(backgroundURL); // Check if the background is liked
+        updateUI(isLiked); // Update the UI with the like status
 
         const likeButton = document.getElementById("likeButton");
-        likeButton.addEventListener("click", () => toggleLike(backgroundURL));
+        if (likeButton) {
+            likeButton.addEventListener("click", () => toggleLike(backgroundURL)); // Add click event to toggle like
+        } else {
+            console.error("Like button not found in the DOM");
+        }
     } catch (error) {
         console.error("Error during initialization:", error);
     }
 }
 
+// Start the initialization when the page is loaded
 init();

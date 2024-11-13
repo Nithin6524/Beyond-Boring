@@ -1,6 +1,7 @@
 const lat = 12.971599;
 const long = 77.594566;
 
+// Fetching weather data
 async function fetchWeather() {
     const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=85f0c87fa86141b8fc3fca0196b56548&units=metric`;
     try {
@@ -10,7 +11,6 @@ async function fetchWeather() {
         }
 
         const data = await response.json();
-
         updateWeatherUI(data);
     } catch (error) {
         console.error(error.message);
@@ -34,36 +34,39 @@ function updateWeatherUI(data) {
     weatherIcon.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
 }
 
+// Calling the fetchWeather function
 fetchWeather();
 
+// Handling most visited URLs and favicons
 window.onload = async () => {
     const mostVisitedURLs = await chrome.topSites.get();
+    console.log(mostVisitedURLs);
     const mostVisitedDiv = document.querySelector(".mostVisited");
-
-    const uniqueUrls = new Set();
 
     const getFavicon = async (url) => {
         const domain = new URL(url).hostname;
-        const parsedUrl = new URL(url);
         const faviconURL = `https://www.faviconextractor.com/favicon/${domain}`;
         try {
             const img = new Image();
             img.src = faviconURL;
             await img.decode();
-            return { icon: faviconURL, link: parsedUrl.origin };
-        } catch {
+            return { icon: faviconURL, link: url };
+        } catch (error) {
+            console.error("Favicon fetch error:", error);
             return null;
         }
     };
 
-    for (const obj of mostVisitedURLs) {
-        if (uniqueUrls.size >= 5) break;
-        const siteData = await getFavicon(obj.url);
-        if (siteData && !uniqueUrls.has(siteData.link)) {
-            uniqueUrls.add(siteData.link);
-            createSiteLink(siteData);
+    const promises = mostVisitedURLs.slice(0, 5).map(async (obj) => {
+        return await getFavicon(obj.url);
+    });
+
+    const siteDataList = await Promise.all(promises);
+    siteDataList.forEach((siteData) => {
+        if (siteData) {
+            createSiteLink(siteData); // Directly create site link without checking for uniqueness
         }
-    }
+    });
 
     function createSiteLink({ icon, link }) {
         const SiteLinkEle = document.createElement("a");
@@ -80,19 +83,6 @@ window.onload = async () => {
     }
 
     const searchInput = document.getElementById("myInput");
-    function simulateEnterKeyPress() {
-        const event = new KeyboardEvent("keydown", {
-            key: "Enter",
-            code: "Enter",
-            which: 13,
-            keyCode: 13,
-            bubbles: true,
-            cancelable: true,
-        });
-
-        searchInput.dispatchEvent(event);
-    }
-
     searchInput.addEventListener("keydown", (event) => {
         if (event.key === "Enter") {
             const query = searchInput.value.trim();
@@ -102,14 +92,14 @@ window.onload = async () => {
             }
         }
     });
-
-    simulateEnterKeyPress();
 };
 
+// Side panel handling
 document.querySelector(".playlist-button").addEventListener("click", () => {
     chrome.runtime.sendMessage({ type: "open_side_panel" });
 });
 
+// Clock updating
 const clockSelectors = {
     hours: document.querySelector(".hours"),
     minutes: document.querySelector(".minutes"),
@@ -129,5 +119,4 @@ function updateClock() {
 }
 
 setInterval(updateClock, 1000);
-
 updateClock();
