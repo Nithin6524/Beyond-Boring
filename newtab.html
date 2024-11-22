@@ -17,11 +17,11 @@
         <link
             href="https://fonts.googleapis.com/css2?family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Space+Grotesk:wght@300..700&display=swap"
             rel="stylesheet" />
-    </head>
+        </head>
     <body>
         <div class="dashboard">
             <div class="column-1">
-                <div class="widget weather">
+                <div class="widget draggable weather">
                     <div class="weather-header">
                         <div class="location-div">
                             <p class="location"></p>
@@ -59,13 +59,9 @@
                     </div>
                 </div>
 
-                <div class="widget photo1"></div>
-                <div class="widget search">
-                    <!-- Search bar content --><input
-                        type="text"
-                        class="search-widget"
-                        id="myInput"
-                        placeholder="Search " />
+                <div class="widget draggable photo1"></div>
+                <div class="widget draggable search">
+                    <input type="text" class="search-widget" id="myInput" placeholder="Search" />
                     <div class="mostVisited">
                         <p>Most Visited sites</p>
                     </div>
@@ -84,7 +80,7 @@
                 </div>
             </div>
             <div class="column-2">
-                <div class="widget clock">
+                <div class="widget draggable clock">
                     <div class="date-container">
                         <p class="date"></p>
                         <p class="month-year"></p>
@@ -96,8 +92,11 @@
                         <p class="minutes"></p>
                     </div>
                 </div>
-                <div class="widget ytube-player">
-                    <input type="text" id="search-input" placeholder="search for video or paste url" />
+                <div class="widget draggable ytube-player">
+                    <input
+                        type="text"
+                        id="search-input"
+                        placeholder="search for video or paste url" />
                     <button class="search-button" id="search-button">Search</button>
                     <button class="playlist-button" id="playlist-button">Playlist</button>
                     <div class="iframe-container">
@@ -105,20 +104,23 @@
                             id="player"
                             type="text/html"
                             src="http://www.youtube.com/embed/0n809nd4Zu4?enablejsapi=1"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;web-share"
                             allowfullscreen
+                            referrerpolicy="strict-origin-when-cross-origin"
                             frameborder="0"></iframe>
                     </div>
                 </div>
             </div>
             <div class="column-3">
-                <div class="widget photo2"></div>
-                <div class="widget photo3"></div>
+                <div class="widget draggable photo2"></div>
+                <div class="widget draggable photo3"></div>
             </div>
         </div>
         <script src="script.js"></script>
         <script src="./vendor/moment.min.js"></script>
         <script src="ytscript.js"></script>
         <script src="backImages.js"></script>
+        <script src="./vendor/interact.min.js"></script>
+        <script src="DragAndDrop.js"></script>
     </body>
 </html>

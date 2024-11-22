@@ -26,7 +26,6 @@ function extractVideoID(url) {
     if (match) {
         return match[1];
     } else {
-        alert("Invalid YouTube URL. Click ok to redirect to youtube search results page.");
         return null;
     }
 }
@@ -42,5 +41,12 @@ function playVideo(videoId) {
     const validOrigin = "http://example.com";
     const sanitizedSrc = `https://www.youtube.com/embed/${videoId}?enablejsapi=1&origin=${validOrigin}&autoplay=1`;
 
-    player.src = sanitizedSrc;
+    try {
+        player.src = sanitizedSrc;
+    } catch (error) {
+        alert("An error occurred while trying to play the video. It may not be embeddable.");
+        console.error("Error playing video:", error);
+    }
 }
+
+

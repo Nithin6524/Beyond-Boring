@@ -5,7 +5,7 @@ chrome.runtime.onMessage.addListener((message, sender) => {
                 await chrome.sidePanel.open({ tabId: sender.tab.id });
                 await chrome.sidePanel.setOptions({
                     tabId: sender.tab.id,
-                    path: "sidepanel.html",
+                    path: "spotify-panel.html",
                     enabled: true,
                 });
             } catch (error) {
@@ -91,4 +91,5 @@ async function getBackgroundURL() {
 chrome.tabs.onCreated.addListener(async (tab) => {
     const backgroundURL = await getBackgroundURL();
     chrome.storage.local.set({ url: `${backgroundURL}` });
+    console.log(`backgroundURL: ${backgroundURL}`);
 });

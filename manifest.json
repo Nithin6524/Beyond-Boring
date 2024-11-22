@@ -16,7 +16,7 @@
     "128": "images/infinity-128.png"
   },
   "side_panel": {
-    "default_path": "sidepanel.html"
+    "default_path": "spotify-panel.html"
   },
   "background": {
     "service_worker": "background.js"
@@ -25,6 +25,7 @@
     "topSites",
     "sidePanel",
     "storage",
-    "tabs"
+    "tabs",
+    "favicon"
   ]
 }

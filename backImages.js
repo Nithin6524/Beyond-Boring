@@ -1,4 +1,3 @@
-// Set the background image based on the URL stored in chrome.storage.local
 async function setBackground() {
     try {
         let { url } = await chrome.storage.local.get("url");
@@ -38,7 +37,6 @@ async function checkIfLiked(backgroundURL) {
     }
 }
 
-// Toggle the 'like' status for a background URL
 async function toggleLike(backgroundURL) {
     if (!backgroundURL) {
         console.error("No background URL set.");
@@ -49,7 +47,6 @@ async function toggleLike(backgroundURL) {
         const { likedBackgrounds = [] } = await chrome.storage.sync.get("likedBackgrounds");
         const isLiked = likedBackgrounds.includes(backgroundURL);
 
-        // If the background is liked, remove it from the list; otherwise, add it
         if (isLiked) {
             const updatedLikedBackgrounds = likedBackgrounds.filter((bg) => bg !== backgroundURL);
             await chrome.storage.sync.set({ likedBackgrounds: updatedLikedBackgrounds });
@@ -104,6 +101,5 @@ async function init() {
         console.error("Error during initialization:", error);
     }
 }
-
 // Start the initialization when the page is loaded
 init();
