@@ -38,10 +38,14 @@ async function getBackgroundURL() {
     } = await chrome.storage.sync.get(["customIndex", "likedIndex", "predefinedIndex"]);
 
     const predefinedBackgrounds = [
+        "https://wallpaperaccess.com/thumb/642857.png",
+        "https://c4.wallpaperflare.com/wallpaper/861/924/6/monica-bellucci-1280x1024-people-hot-girls-hd-art-wallpaper-preview.jpg",
+        "https://c4.wallpaperflare.com/wallpaper/800/164/994/monica-bellucci-celebrity-hd-wallpaper-preview.jpg",
+        "https://c4.wallpaperflare.com/wallpaper/564/791/583/actresses-monica-bellucci-wallpaper-preview.jpg",
+        "https://wallpapers-clan.com/wp-content/uploads/2024/11/ghost-in-the-shell-motoko-kusanagi-desktop-wallpaper-cover.jpg",
         "https://wallpapers-clan.com/wp-content/uploads/2024/10/crimson-sunset-mountain-range-desktop-wallpaper-cover.jpg",
-        "https://wallpapers-clan.com/wp-content/uploads/2024/07/retro-synthwave-neon-desktop-wallpaper-cover.jpg",
-        "https://wallpapers-clan.com/wp-content/uploads/2024/09/solitary-mountain-watcher-sunset-desktop-wallpaper-cover.jpg",
         "https://wallpapers-clan.com/wp-content/uploads/2024/05/alien-red-planet-scenery-desktop-wallpaper-cover.jpg",
+        "https://wallpapers-clan.com/wp-content/uploads/2024/11/hogwarts-student-magic-potion-class-desktop-wallpaper-cover.jpg"
     ];
 
     const hasEnoughCustoms = customBackgrounds.length >= 3;
