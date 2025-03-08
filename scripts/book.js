@@ -65,7 +65,9 @@ async function loadBook(id) {
     try {
         console.log(`Fetching book ID: ${id}`);
 
-        const response = await fetch(`http://localhost:3000/api/books/${id}`);
+        const response = await fetch(
+            `https://proxy-server-o1yd.onrender.com/api/books/${id}`
+        );
         let bookHtml = await response.text();
 
         // Create a temporary div to parse the HTML content
