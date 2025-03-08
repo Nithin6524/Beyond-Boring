@@ -15,13 +15,8 @@
     "48": "images/infinity-48.png",
     "128": "images/infinity-128.png"
   },
- 
-  "background": {
-    "service_worker": "background.js"
-  },
   "permissions": [
     "topSites",
-    "sidePanel",
     "storage",
     "tabs",
     "favicon"
