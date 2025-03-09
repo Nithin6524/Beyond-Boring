@@ -29,7 +29,7 @@ async function fetchWeather() {
 function updateWeatherUI(data) {
     const weatherMap = {
         ".location": data.name,
-        ".temperature": `${data.main.temp}°C`,
+        ".temperature": `${(data.main.temp - 273.15).toFixed(2)}°C`,
         ".wind": `Wind: ${data.wind.speed} m/s`,
         ".description": data.weather[0].description,
     };
