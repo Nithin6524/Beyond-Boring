@@ -24,7 +24,7 @@ async function renderBooks(query) {
             `;
             bookList.appendChild(bookElement);
         } else {
-            books.slice(0, 3).forEach((book) => {
+            books.slice(0, 5).forEach((book) => {
                 const bookElement = document.createElement("li");
                 bookElement.innerHTML = `
                 <a href="https://www.gutenberg.org/cache/epub/${book.id}/pg${book.id}-images.html" target="_blank" id="book-link" class="book-link">
@@ -65,123 +65,220 @@ async function loadBook(id) {
     try {
         console.log(`Fetching book ID: ${id}`);
 
-        const response = await fetch(
-            `https://proxy-server-o1yd.onrender.com/api/books/${id}`
-        );
-        let bookHtml = await response.text();
-
-        // Create a temporary div to parse the HTML content
-        const tempDiv = document.createElement("div");
-        tempDiv.innerHTML = bookHtml;
-
-        // Find the first <h1> and remove everything before it
-        const headings = tempDiv.querySelectorAll("h1");
-        if (headings.length > 0) {
-            const firstHeading = headings[0];
-            firstHeading.style.marginTop = "0";
-            // Remove all content before the first <h1>
-            while (tempDiv.firstChild !== firstHeading) {
-                tempDiv.removeChild(tempDiv.firstChild);
-            }
-        } else {
-            console.warn("No <h1> found in the book content.");
-        }
-
-        // Select book container
-        const bookContainer = document.querySelector(".books");
-
-        // Clear previous content
-        bookContainer.innerHTML = "";
-
-        // Create a custom book-reader element
-        const bookReader = document.createElement("book-reader");
-
-        // Attach a Shadow DOM
-        const shadow = bookReader.attachShadow({ mode: "closed" });
-
-        // Create a container for the filtered content inside Shadow DOM
-        const bookWrapper = document.createElement("div");
-        bookWrapper.innerHTML = tempDiv.innerHTML; // Insert only the filtered content
-
-        // Apply styles within the Shadow DOM
-        const style = document.createElement("style");
-        style.textContent = `
-            .book-reader {
-                color: #fff;
-                padding: 20px;
-                border: 1px solid #ccc;
-                border-radius: 5px;
-                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-                
-            }
-                .
-            div {
-                color:white;
-                font-family:"JetBrains Mono", monospace;
-            }
-                h5{
-                font-size: 1.5rem;
-                }
-                h6{
-                font-size: 1.2rem;
-                }h3{
-                font-size: 2rem;
-                }h1{
-                font-size: 3rem;
-                }
-                p{
-                font-size:1rem;
-                }
-
-
-                a{
-                color: #fff;
-                text-decoration: none;
-                }
-                a:hover {
-                color: orange;
-                }
-
-                .menu {
-                position: fixed;
-                bottom:16.25rem;
-                right: 2rem;
-                background: rgba(255, 255, 255, 0.2);
-                color: white;
-                border: none;
-                padding: 10px;
-                font-size: 20px;
-                cursor: pointer;
-                border-radius: 50%;
-                width: 40px;
-                height: 40px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-        `;
-        const menuButton = document.createElement("button");
-        menuButton.classList.add("menu");
-        menuButton.innerHTML = "⋮";
-        menuButton.addEventListener("click", () => {
-            const confirmChange = confirm("Do you want to change the book?");
-            if (confirmChange) {
-                localStorage.removeItem("selectedBook");
-                location.reload(); // Refresh page to allow new selection
-            }
-        });
-        // Append styles and book content inside the Shadow DOM
-        shadow.appendChild(style);
-        shadow.appendChild(bookWrapper);
-
-        // Add the custom element to the book container
-
-        shadow.appendChild(menuButton);
-        bookContainer.appendChild(bookReader);
-        localStorage.setItem("selectedBook", id);
+        const bookHtml = await fetchBookContent(id);
+        const filteredContent = extractMainContent(bookHtml);
+        renderBook(filteredContent, id);
     } catch (error) {
         console.error("Error fetching book:", error);
     }
+}
+
+// 🟢 Fetch book content from the server
+async function fetchBookContent(id) {
+    const response = await fetch(
+        `https://proxy-server-o1yd.onrender.com/api/books/${id}`
+    );
+    return await response.text();
+}
+
+// 🟢 Extract main content (starting from <h1>)
+function extractMainContent(html) {
+    const tempDiv = document.createElement("div");
+    tempDiv.innerHTML = html;
+
+    const headings = tempDiv.querySelectorAll("h1");
+    if (headings.length > 0) {
+        const firstHeading = headings[0];
+        firstHeading.style.marginTop = "0";
+        while (tempDiv.firstChild !== firstHeading) {
+            tempDiv.removeChild(tempDiv.firstChild);
+        }
+    } else {
+        console.warn("No <h1> found in the book content.");
+    }
+
+    return tempDiv.innerHTML;
+}
+
+// 🟢 Render book content inside a Shadow DOM
+function renderBook(content, id) {
+    const bookContainer = document.querySelector(".books");
+    bookContainer.innerHTML = ""; // Clear previous content
+
+    const bookReader = document.createElement("book-reader");
+    const shadow = bookReader.attachShadow({ mode: "closed" });
+
+    // Book wrapper for pagination
+    const bookWrapper = document.createElement("div");
+    bookWrapper.classList.add("book-content");
+
+    // Normalize text (wrap all in <p> to maintain uniform styles)
+    const tempContainer = document.createElement("div");
+    tempContainer.innerHTML = content;
+
+    tempContainer.querySelectorAll("div, span, section").forEach((el) => {
+        const p = document.createElement("p");
+        p.innerHTML = el.innerHTML;
+        el.replaceWith(p);
+    });
+
+    bookWrapper.innerHTML = tempContainer.innerHTML;
+
+    // Scroll position restoration
+    const savedScroll = localStorage.getItem(`scroll-${id}`);
+    if (savedScroll) {
+        setTimeout(() => {
+            bookWrapper.scrollTop = parseInt(savedScroll, 10);
+        }, 100);
+    }
+
+    bookWrapper.addEventListener("scroll", () => {
+        localStorage.setItem(`scroll-${id}`, bookWrapper.scrollTop);
+    });
+
+    // Pagination controls
+    const prevButton = document.createElement("button");
+    prevButton.textContent = "⬅";
+    prevButton.classList.add("pagination-btn", "prev");
+    prevButton.addEventListener("click", () => paginate(bookWrapper, -1));
+
+    const nextButton = document.createElement("button");
+    nextButton.textContent = "➡";
+    nextButton.classList.add("pagination-btn", "next");
+    nextButton.addEventListener("click", () => paginate(bookWrapper, 1));
+
+    const homeButton = document.createElement("button");
+    homeButton.textContent = "🏠";
+    homeButton.classList.add("pagination-btn", "home");
+    homeButton.addEventListener("click", () => {
+        bookWrapper.scrollTop = 0;
+        localStorage.removeItem(`scroll-${id}`);
+    });
+
+    // Sticky menu button for changing books
+    const menuButton = document.createElement("button");
+    menuButton.classList.add("menu");
+    menuButton.innerHTML = "⋮";
+    menuButton.addEventListener("click", () => {
+        const confirmChange = confirm("Do you want to change the book?");
+        if (confirmChange) {
+            localStorage.removeItem("selectedBook");
+            localStorage.removeItem(`scroll-${id}`);
+            location.reload();
+        }
+    });
+
+    // Add styles
+    const style = document.createElement("style");
+    style.textContent = `
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .book-content {
+            color: white;
+            font-family: "JetBrains Mono", monospace;
+            padding: 30px;
+            height: 80vh;
+            overflow-y: scroll;
+            scrollbar-width: none;
+            line-height: 1.5;
+            text-align: justify;
+            font-size: 1rem;
+        }
+        p, h1, h2, h3, h4, h5, h6 {
+            margin-bottom: 10px;
+            
+        }
+        p { font-size: 1rem; }
+        h1 { font-size: 1.8rem; font-weight: bold; }
+        h2 { font-size: 1.6rem; font-weight: bold; }
+        h3 { font-size: 1.4rem; font-weight: bold; }
+        h4 { font-size: 1.2rem; }
+        h5 { font-size: 1rem; font-style: italic; }
+        h6 { font-size: 0.9rem; font-style: italic; }
+        a { color: white; text-decoration: none; }
+        a:hover { color: orange; }
+
+        .menu {
+            position: fixed;
+            bottom: 16.25rem;
+            right: 2rem;
+            background: rgba(255, 255, 255, 0);
+            color: white;
+            border: none;
+            padding: 10px;
+            font-size: 20px;
+            cursor: pointer;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .menu:hover{
+            background: rgba(255, 255, 255, 0.2);}
+        .pagination-btn {
+            position: fixed;
+            bottom: 1rem;
+            background: rgba(255, 255, 255, 0);
+            color: white;
+            border: none;
+            padding: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+        }
+        .pagination-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .prev { right: 35rem;
+    bottom: 10rem;
+}
+        .next { right: 1.7rem;
+    bottom: 10rem;
+     }
+
+        .home {
+            right: 35rem;
+            bottom: 17rem;
+        }
+    `;
+
+    // Append elements to Shadow DOM
+    shadow.appendChild(style);
+    shadow.appendChild(bookWrapper);
+    shadow.appendChild(prevButton);
+    shadow.appendChild(nextButton);
+    shadow.appendChild(menuButton);
+    shadow.appendChild(homeButton);
+    shadow.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", (event) => {
+            event.preventDefault();
+            const targetId = anchor.getAttribute("href").substring(1); // Remove the "#"
+            const targetElement = shadow.getElementById(targetId); // Find in Shadow DOM
+
+            if (targetElement) {
+                targetElement.scrollIntoView({ behavior: "smooth" });
+            }
+        });
+    });
+
+    // Append book reader to container
+    bookContainer.appendChild(bookReader);
+
+    // Save book selection
+    localStorage.setItem("selectedBook", id);
+}
+
+// 🟢 Pagination function
+function paginate(container, direction) {
+    const pageHeight = 18 * 16;
+    container.scrollBy({ top: direction * pageHeight, behavior: "smooth" });
 }
 
 document.querySelector(".book-list").addEventListener("click", (event) => {
