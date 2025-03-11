@@ -16,7 +16,7 @@
 
 .articles {
     overflow-y: scroll;
-    max-height: 20rem;
+    max-height: 23rem;
     scrollbar-width: none;
     list-style-type: disc;
     margin: 0;

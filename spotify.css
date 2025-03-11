@@ -115,7 +115,7 @@ iframe {
 }
 
 .change-button {
-    position: absolute;
+    position: fixed;
     top: 2.6rem;
     left: 60rem;
     background: rgba(255, 255, 255, 0);
@@ -131,9 +131,15 @@ iframe {
     align-items: center;
     justify-content: center;
     font-size: 1.5rem;
-
 }
 
 .change-button:hover {
     background: rgba(255, 255, 255, 0.1);
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1440px) {
+    .change-button {
+        top: 2.25rem;
+        left: 34rem;
+    }
 }

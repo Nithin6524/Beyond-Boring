@@ -247,6 +247,19 @@ function renderBook(content, id) {
             right: 35rem;
             bottom: 17rem;
         }
+
+
+        @media screen and (min-width: 1024px) and (max-width: 1440px) {
+        .home {
+    right: 15rem;
+    bottom: 17rem;
+}           
+        .prev{
+            right: 15rem;
+            bottom: 10rem;
+        }
+            
+        }
     `;
 
     // Append elements to Shadow DOM

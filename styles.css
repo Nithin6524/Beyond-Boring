@@ -17,6 +17,7 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     background-image: url("./images/sand-dunes-night-sky-macos-desktop-wallpaper-4k.jpg");
+    height: 90vh;
 }
 .dashboard {
     transform: translateY(5%);
@@ -34,6 +35,7 @@ body {
     backdrop-filter: blur(10px);
     z-index: 2;
     padding: 1.5rem;
+
 }
 
 .column-1 {
@@ -319,7 +321,92 @@ body {
     }
 }
 
-
 .iframe-container {
     max-width: 100%;
+}
+
+@media only screen and (max-width: 1024px) {
+    .dashboard {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+    .column-1,
+    .column-2 {
+        display: none;
+    }
+    .books,
+    .weather,
+    .clock,
+    .sites,
+    .spotify {
+        display: none;
+    }
+    .dashboard::before {
+        content: "Use large screens for better experience";
+        font-size: 1.5rem;
+        color: white;
+        text-align: center;
+        display: block;
+    }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1440px) {
+    .weather-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .weather-icon {
+        width: 50px;
+        height: auto;
+    }
+    .location-div {
+        display: flex;
+        gap: 0;
+    }
+    .weather-details {
+        display: flex;
+        justify-content: space-between;
+        font-size: 9px;
+        align-items: center;
+    }
+
+    .temperature {
+        font-size: 2rem;
+    }
+
+    .wind-div svg {
+        width: 20px;
+    }
+    .wind-div {
+        display: flex;
+        align-items: center;
+    }
+
+    .column-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-areas:
+            "spotify spotify clock"
+            "sites sites books";
+    }
+
+    .pagination-btn {
+        left: 41rem;
+    }
+
+    h3 {
+        font-size: 1rem;
+    }
+    .articles {
+        max-height: 25rem;
+    }
+
+    .day {
+        letter-spacing: 0.15cap;
+        right: 4rem;
+    }
 }
