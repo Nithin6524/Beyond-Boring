@@ -35,7 +35,6 @@ body {
     backdrop-filter: blur(10px);
     z-index: 2;
     padding: 1.5rem;
-
 }
 
 .column-1 {
@@ -51,7 +50,7 @@ body {
     display: grid;
     gap: 1rem;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: auto 1fr;
+    grid-template-rows: 1fr auto;
     grid-template-areas:
         "spotify spotify clock"
         "sites books books";
