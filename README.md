@@ -13,6 +13,10 @@ Beyond Boring reimagines your Google homepage, infusing it with creativity and e
 
 ---
 
+This is how the dashboard looks !!!
+![image](https://github.com/user-attachments/assets/45846022-0e8c-4d32-8d12-d2187edf6a73)
+
+
 ## Installation Guide
 
 ### Step 1: Download the Extension Files
