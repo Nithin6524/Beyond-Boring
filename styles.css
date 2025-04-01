@@ -16,7 +16,7 @@ body {
     align-items: center;
     background-repeat: no-repeat;
     background-size: cover;
-    background-image: url("./images/sand-dunes-night-sky-macos-desktop-wallpaper-4k.jpg");
+    background-image: url("https://wallpapers-clan.com/wp-content/uploads/2024/03/one-piece-chibi-roronoa-zoro-dark-green-desktop-wallpaper-preview.jpg");
     height: 90vh;
 }
 .dashboard {
@@ -270,11 +270,12 @@ body {
     background: none;
 }
 
-.books {
+.photo {
     grid-area: books;
     max-height: 18rem;
-    overflow-y: scroll;
-    scrollbar-width: none;
+    background: url("https://wallpapers-clan.com/wp-content/uploads/2025/03/chibi-luffy-zoro-one-piece-laugh-desktop-wallpaper-preview.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 .book-reader {
     overflow-y: scroll;
@@ -336,7 +337,7 @@ body {
     .column-2 {
         display: none;
     }
-    .books,
+    .photo,
     .weather,
     .clock,
     .sites,
