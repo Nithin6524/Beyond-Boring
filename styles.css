@@ -16,8 +16,11 @@ body {
     align-items: center;
     background-repeat: no-repeat;
     background-size: cover;
-    background-image: url("https://wallpapers-clan.com/wp-content/uploads/2024/03/one-piece-chibi-roronoa-zoro-dark-green-desktop-wallpaper-preview.jpg");
     height: 90vh;
+    background: #536976; 
+    background: -webkit-linear-gradient(to right, #536976, #292e49); 
+    background: linear-gradient(to right, #536976, #292e49); 
+
 }
 .dashboard {
     transform: translateY(5%);
@@ -70,7 +73,7 @@ body {
 }
 
 .weather {
-    grid-area: weather;
+    grid-area: "weather";
     font-family: "Space Grotesk", sans-serif;
     font-optical-sizing: auto;
     font-weight: 400;
@@ -276,54 +279,10 @@ body {
     background: url("https://wallpapers-clan.com/wp-content/uploads/2025/03/chibi-luffy-zoro-one-piece-laugh-desktop-wallpaper-preview.jpg");
     background-size: cover;
     background-repeat: no-repeat;
-}
-.book-reader {
-    overflow-y: scroll;
-    scrollbar-width: 1px;
-}
-.book-link {
-    text-emphasis: none;
-    color: white;
-    font-family: var(--font);
-    text-decoration: none;
-    font-weight: bold;
+    filter: contrast(1.5);
 }
 
-.book-link:hover {
-    color: var(--highlight1);
-}
 
-.book-list {
-    list-style-type: disc;
-    max-height: 10rem;
-    overflow-y: scroll;
-    scrollbar-width: none;
-}
-/*search bar css starts here*/
-
-.loader {
-    display: none; /* Hidden by default */
-    width: 30px;
-    height: 30px;
-    border: 4px solid #f3f3f3;
-    border-top: 4px solid #07051a;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin: 10px auto;
-}
-
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-.iframe-container {
-    max-width: 100%;
-}
 
 @media only screen and (max-width: 1024px) {
     .dashboard {
