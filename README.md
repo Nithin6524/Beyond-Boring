@@ -9,12 +9,12 @@ Beyond Boring reimagines your Google homepage, infusing it with creativity and e
 - **Clock Widget**: Displays the current date, time, and day, along with a motivational quote.
 - **Weather Widget**: Stay informed about the latest weather conditions in your area.
 - **News Articles**: Browse the latest tech-related articles right from your new tab.
-- **Book Widget**: Search for books and read them directly within the dashboard.
 
 ---
 
 This is how the dashboard looks !!!
-![image](https://github.com/user-attachments/assets/45846022-0e8c-4d32-8d12-d2187edf6a73)
+![image](https://github.com/user-attachments/assets/f7ec0058-55ca-431b-82c7-fa5913f45839)
+
 
 
 ## Installation Guide
@@ -57,9 +57,6 @@ This is how the dashboard looks !!!
 ### **News Articles Widget**
 - Fetches the latest articles in the technology category.
 
-### **Book Widget**
-1. Enter a book title in the search bar.
-2. Select a result to read the book directly within the widget.
 
 ---
 
